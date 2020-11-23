@@ -52,6 +52,7 @@ public class Banner extends FrameLayout {
         int indicatorOrientation = attributes.getInt(R.styleable.Banner_indicatorOrientation, 0);
         //是否自動撥放
         boolean isAutoPlaying = attributes.getBoolean(R.styleable.Banner_autoPlay, true);
+        boolean loopMode = attributes.getBoolean(R.styleable.Banner_loopMode, true);
         interval = attributes.getInt(R.styleable.Banner_interval, 3000);
         int orientation = attributes.getInt(R.styleable.Banner_orientation, 0);
         int scrollTime = attributes.getInt(R.styleable.Banner_scrollTime, 500);
@@ -62,6 +63,7 @@ public class Banner extends FrameLayout {
                 ViewGroup.LayoutParams.MATCH_PARENT);
         addView(recyclerView, vpLayoutParams);
         layoutManager = new BannerLayoutManager(orientation);
+        layoutManager.setLoopMode(loopMode);
         layoutManager.setSmoothScrollTime(scrollTime);
         bannerAdapter = new BannerAdapter();
         recyclerView.setLayoutManager(layoutManager);
@@ -116,6 +118,10 @@ public class Banner extends FrameLayout {
 
     public void setScrollTime(int scrollTime){
         layoutManager.setSmoothScrollTime(scrollTime);
+    }
+
+    public void setLoopMode(boolean loopMode){
+        layoutManager.setLoopMode(loopMode);
     }
 
     public void setDate(List<String> data){

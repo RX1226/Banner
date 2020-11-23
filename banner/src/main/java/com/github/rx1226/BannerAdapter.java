@@ -29,7 +29,6 @@ public class BannerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         this.data = data;
     }
 
-
     public void setClickListener(ClickListener clickListener){
         this.clickListener = clickListener;
     }

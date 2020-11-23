@@ -23,5 +23,6 @@
         <attr name="orientation" />
         <attr name="autoPlay" format="boolean"/>
         <attr name="scrollTime" format="integer"/>
+        <attr name="loopMode" format="boolean"/>
     </declare-styleable>
 </resources>
