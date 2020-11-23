@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="orientation" format="enum">
+        <enum name="horizontal" value="0"/>
+        <enum name="vertical" value="1"/>
+    </attr>
+    <attr name="indicatorGravity" format="enum">
+        <enum name="BOTTOM" value="81"/>
+        <enum name="TOP" value="49"/>
+        <enum name="LEFT" value="8388627"/>
+        <enum name="RIGHT" value="8388629"/>
+    </attr>
+    <attr name="indicatorOrientation" format="enum">
+        <enum name="horizontal" value="0"/>
+        <enum name="vertical" value="1"/>
+    </attr>
+
+    <declare-styleable name="Banner">
+        <attr name="interval" format="integer"/>
+        <attr name="showIndicator" format="boolean"/>
+        <attr name="indicatorGravity"/>
+        <attr name="indicatorOrientation" />
+        <attr name="orientation" />
+        <attr name="autoPlay" format="boolean"/>
+    </declare-styleable>
+</resources>
