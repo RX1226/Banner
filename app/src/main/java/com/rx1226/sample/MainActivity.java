@@ -13,6 +13,7 @@ import com.github.rx1226.Banner;
 import com.github.rx1226.ClickListener;
 import com.github.rx1226.ScrollListener;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,10 +25,10 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        List<String> list = Arrays.asList(
+        List<String> list = new ArrayList<>(Arrays.asList(
                 "https://raw.githubusercontent.com/RX1226/Banner/master/image/img1.png",
                 "https://raw.githubusercontent.com/RX1226/Banner/master/image/img2.png",
-                "https://raw.githubusercontent.com/RX1226/Banner/master/image/img3.png");
+                "https://raw.githubusercontent.com/RX1226/Banner/master/image/img3.png"));
 
         banner = findViewById(R.id.banner);
         banner.setDate(list);
@@ -43,6 +44,9 @@ public class MainActivity extends AppCompatActivity{
                 Log.d("TAG", "onClick = " + position);
             }
         });
+        banner.appendDate(new ArrayList<>(Arrays.asList(
+                "https://raw.githubusercontent.com/RX1226/Banner/master/image/img4.png",
+                "https://raw.githubusercontent.com/RX1226/Banner/master/image/img5.png")));
     }
 
     @Override

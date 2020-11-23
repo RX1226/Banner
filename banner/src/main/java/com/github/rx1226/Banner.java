@@ -120,6 +120,12 @@ public class Banner extends FrameLayout {
         }
     }
 
+    public void appendDate(List<String> data){
+        this.data.addAll(data);
+        bannerAdapter.setData(this.data);
+        indicatorAdapter.setSize(this.data.size());
+    }
+
     private final Runnable autoRun = new Runnable() {
         int currentIndex;
         @Override

@@ -7,6 +7,8 @@
 
 A banner for Android.
 
+It can download image form Internert and append data
+
 *Inspired by [ZhangHao555](https://github.com/ZhangHao555)/**[BannerRecyclerView](https://github.com/ZhangHao555/BannerRecyclerView)**
 
 *Inspired by [ren93](https://github.com/ren93)/**[RecyclerBanner](https://github.com/ren93/RecyclerBanner)****
@@ -46,10 +48,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        List<String> list = Arrays.asList(
+        List<String> list = new ArrayList<>(Arrays.asList(
                 "https://raw.githubusercontent.com/RX1226/Banner/master/image/img1.png",
                 "https://raw.githubusercontent.com/RX1226/Banner/master/image/img2.png",
-                "https://raw.githubusercontent.com/RX1226/Banner/master/image/img3.png");
+                "https://raw.githubusercontent.com/RX1226/Banner/master/image/img3.png"));
 
         banner = findViewById(R.id.banner);
         banner.setDate(list);
@@ -65,6 +67,9 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("TAG", "onClick = " + position);
             }
         });
+        banner.appendDate(new ArrayList<>(Arrays.asList(
+                "https://raw.githubusercontent.com/RX1226/Banner/master/image/img4.png",
+                "https://raw.githubusercontent.com/RX1226/Banner/master/image/img5.png")));
     }
 }
 ```
