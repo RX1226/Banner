@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity{
 
         banner = findViewById(R.id.banner);
         banner.setDate(list);
+        banner.setScrollTime(2000);
         banner.setScrollListener(new ScrollListener() {
             @Override
             public void onScrollStateChanged(int currentPosition, @NonNull RecyclerView recyclerView) {

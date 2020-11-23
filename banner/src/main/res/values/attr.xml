@@ -22,5 +22,6 @@
         <attr name="indicatorOrientation" />
         <attr name="orientation" />
         <attr name="autoPlay" format="boolean"/>
+        <attr name="scrollTime" format="integer"/>
     </declare-styleable>
 </resources>

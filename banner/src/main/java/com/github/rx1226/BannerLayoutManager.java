@@ -9,16 +9,16 @@ import androidx.recyclerview.widget.RecyclerView;
 public class BannerLayoutManager extends RecyclerView.LayoutManager implements RecyclerView.SmoothScroller.ScrollVectorProvider {
 
     protected final OrientationHelper mOrientationHelper;
-    private float heightScale = 0.9f;
-    private float widthScale = 0.9f;
+    private float heightScale = 1f;
+    private float widthScale = 1f;
 
     private boolean loop = true;  //默认无限循环
     protected int itemWidth;
     private int smoothScrollTime = 500;
     private boolean hasLayout;
 
-    public BannerLayoutManager() {
-        mOrientationHelper = OrientationHelper.createHorizontalHelper(this);
+    public BannerLayoutManager(int orientation) {
+        mOrientationHelper = OrientationHelper.createOrientationHelper(this, orientation);
     }
 
     @Override
