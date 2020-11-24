@@ -27,7 +27,7 @@ It can download image form Internert and append data
 2. Add the dependency:
 ```
     dependencies {
-        implementation 'com.github.RX1226:Banner:1.0.0'
+        implementation 'com.github.RX1226:Banner:1.0.1'
     }
 ```
 
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("TAG", "currentPosition = " + currentPosition);
             }
         });
-        banner.setOnClickListener(new ClickListener() {
+        banner.setOnItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position) {
                 Log.d("TAG", "onClick = " + position);
