@@ -149,12 +149,12 @@ public  class BannerLayoutManager extends RecyclerView.LayoutManager {
 
     @Override
     public boolean canScrollHorizontally() {
-        return mOrientation == OrientationHelper.HORIZONTAL;
+        return (mOrientation == OrientationHelper.HORIZONTAL && getItemCount() > 1);
     }
 
     @Override
     public boolean canScrollVertically() {
-        return mOrientation == OrientationHelper.VERTICAL;
+        return (mOrientation == OrientationHelper.VERTICAL && getItemCount() > 1);
     }
 
     /**
