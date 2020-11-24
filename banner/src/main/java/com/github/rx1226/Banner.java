@@ -5,6 +5,8 @@ import android.content.res.TypedArray;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
@@ -18,6 +20,7 @@ import com.github.rx1226.banner.R;
 import java.util.List;
 
 import static android.widget.AbsListView.OnScrollListener.SCROLL_STATE_IDLE;
+import static android.widget.AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL;
 import static com.github.rx1226.Unit.dp2px;
 
 public class Banner extends FrameLayout {
@@ -31,6 +34,8 @@ public class Banner extends FrameLayout {
     private int interval; //刷新時間區間
     private Handler handler;
     private ScrollListener scrollListener;
+    private int currentPosition;
+    private boolean isTouch;
 
     public Banner(@NonNull Context context) {
         this(context, null);
@@ -52,10 +57,10 @@ public class Banner extends FrameLayout {
         int indicatorOrientation = attributes.getInt(R.styleable.Banner_indicatorOrientation, 0);
         //是否自動撥放
         boolean isAutoPlaying = attributes.getBoolean(R.styleable.Banner_autoPlay, true);
-        boolean loopMode = attributes.getBoolean(R.styleable.Banner_loopMode, true);
+//        boolean loopMode = attributes.getBoolean(R.styleable.Banner_loopMode, true);
         interval = attributes.getInt(R.styleable.Banner_interval, 3000);
         int orientation = attributes.getInt(R.styleable.Banner_orientation, 0);
-        int scrollTime = attributes.getInt(R.styleable.Banner_scrollTime, 500);
+//        int scrollTime = attributes.getInt(R.styleable.Banner_scrollTime, 500);
         attributes.recycle();
 
         recyclerView = new RecyclerView(context);
@@ -63,8 +68,8 @@ public class Banner extends FrameLayout {
                 ViewGroup.LayoutParams.MATCH_PARENT);
         addView(recyclerView, vpLayoutParams);
         layoutManager = new BannerLayoutManager(orientation);
-        layoutManager.setLoopMode(loopMode);
-        layoutManager.setSmoothScrollTime(scrollTime);
+//        layoutManager.setLoopMode(loopMode);
+//        layoutManager.setSmoothScrollTime(scrollTime);
         bannerAdapter = new BannerAdapter();
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(bannerAdapter);
@@ -72,8 +77,15 @@ public class Banner extends FrameLayout {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                int currentPosition = layoutManager.getCurrentPosition();
+                if(newState == SCROLL_STATE_TOUCH_SCROLL){
+                    currentPosition = layoutManager.getCurrentPosition();
+                    indicatorAdapter.setPosition(currentPosition);
+                    isTouch = true;
+                }else {
+                    isTouch = false;
+                }
                 if(newState == SCROLL_STATE_IDLE){
+                    currentPosition = layoutManager.getCurrentPosition();
                     indicatorAdapter.setPosition(currentPosition);
                     if(scrollListener != null) scrollListener.onScrollStateChanged(currentPosition, recyclerView);
                 }
@@ -116,13 +128,13 @@ public class Banner extends FrameLayout {
         indicatorContainer.setVisibility(isShowIndicator ? VISIBLE : GONE);
     }
 
-    public void setScrollTime(int scrollTime){
-        layoutManager.setSmoothScrollTime(scrollTime);
-    }
+//    public void setScrollTime(int scrollTime){
+//        layoutManager.setSmoothScrollTime(scrollTime);
+//    }
 
-    public void setLoopMode(boolean loopMode){
-        layoutManager.setLoopMode(loopMode);
-    }
+//    public void setLoopMode(boolean loopMode){
+//        layoutManager.setLoopMode(loopMode);
+//    }
 
     public void setDate(List<String> data){
         if(data != null) {
@@ -139,20 +151,21 @@ public class Banner extends FrameLayout {
     }
 
     private final Runnable autoRun = new Runnable() {
-        int currentIndex;
         @Override
         public void run() {
-            currentIndex = layoutManager.getCurrentPosition() + 1;
-            if(currentIndex == data.size()) currentIndex = 0;
-            recyclerView.smoothScrollToPosition(currentIndex);
-            indicatorAdapter.setPosition(currentIndex);
+            if(!isTouch) {
+                currentPosition = layoutManager.getCurrentPosition() + 1;
+                if (currentPosition == data.size()) currentPosition = 0;
+                recyclerView.smoothScrollToPosition(currentPosition);
+                indicatorAdapter.setPosition(currentPosition);
+            }
             handler.postDelayed(this, interval);
         }
     };
     public void start(){
         if(handler == null) {
             handler = new Handler();
-            handler.post(autoRun);
+            handler.postDelayed(autoRun, interval);
         }
     }
     public void stop(){
