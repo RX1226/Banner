@@ -17,7 +17,7 @@ import java.util.List;
 public class BannerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
     private List<String> data;
-    private ClickListener clickListener;
+    private ItemClickListener itemClickListener;
 
     public BannerAdapter() {}
 
@@ -29,8 +29,8 @@ public class BannerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         this.data = data;
     }
 
-    public void setClickListener(ClickListener clickListener){
-        this.clickListener = clickListener;
+    public void setItemClickListener(ItemClickListener itemClickListener){
+        this.itemClickListener = itemClickListener;
     }
 
     @NonNull
@@ -56,7 +56,7 @@ public class BannerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         public ImageHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(view -> {
-                if(clickListener != null) clickListener.onClick(view, getAdapterPosition());
+                if(itemClickListener != null) itemClickListener.onClick(view, getAdapterPosition());
             });
             img = itemView.findViewById(R.id.img);
         }

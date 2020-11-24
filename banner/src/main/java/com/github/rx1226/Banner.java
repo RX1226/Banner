@@ -92,6 +92,8 @@ public class Banner extends FrameLayout {
 
         //指示器
         indicatorContainer = new RecyclerView(context);
+        indicatorContainer.setFocusable(false);
+        indicatorContainer.setFocusableInTouchMode(false);
         LinearLayoutManager indicatorLayoutManager = new LinearLayoutManager(context, indicatorOrientation, false);
         indicatorContainer.setLayoutManager(indicatorLayoutManager);
         indicatorAdapter = new IndicatorAdapter();
@@ -116,8 +118,8 @@ public class Banner extends FrameLayout {
         this.scrollListener = scrollListener;
     }
 
-    public void setOnClickListener(ClickListener clickListener){
-        bannerAdapter.setClickListener(clickListener);
+    public void setOnItemClickListener(ItemClickListener itemClickListener){
+        bannerAdapter.setItemClickListener(itemClickListener);
     }
 
     public void showIndicator(boolean isShowIndicator) {

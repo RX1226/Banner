@@ -508,7 +508,7 @@ public  class BannerLayoutManager extends RecyclerView.LayoutManager {
             }
         }
 
-        currentFocusView.requestFocus();
+//        currentFocusView.requestFocus();
     }
 
     private boolean useMaxVisibleCount() {

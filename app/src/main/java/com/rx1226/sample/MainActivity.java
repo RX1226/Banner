@@ -2,7 +2,6 @@ package com.rx1226.sample;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -10,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.rx1226.Banner;
-import com.github.rx1226.ClickListener;
+import com.github.rx1226.ItemClickListener;
 import com.github.rx1226.ScrollListener;
 
 import java.util.ArrayList;
@@ -39,7 +38,7 @@ public class MainActivity extends AppCompatActivity{
                 Log.d("TAG", "currentPosition = " + currentPosition);
             }
         });
-        banner.setOnClickListener(new ClickListener() {
+        banner.setOnItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position) {
                 Log.d("TAG", "onClick = " + position);
