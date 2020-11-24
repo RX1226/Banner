@@ -27,7 +27,7 @@ It can download image form Internert and append data
 2. Add the dependency:
 ```
     dependencies {
-        implementation 'com.github.RX1226:Banner:1.0.1'
+        implementation 'com.github.RX1226:Banner:1.0.2'
     }
 ```
 
