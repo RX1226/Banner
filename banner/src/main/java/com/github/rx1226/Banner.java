@@ -5,8 +5,6 @@ import android.content.res.TypedArray;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.Gravity;
-import android.view.MotionEvent;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
@@ -36,6 +34,7 @@ public class Banner extends FrameLayout {
     private ScrollListener scrollListener;
     private int currentPosition;
     private boolean isTouch;
+    private boolean loopMode;
 
     public Banner(@NonNull Context context) {
         this(context, null);
@@ -57,10 +56,9 @@ public class Banner extends FrameLayout {
         int indicatorOrientation = attributes.getInt(R.styleable.Banner_indicatorOrientation, 0);
         //是否自動撥放
         boolean isAutoPlaying = attributes.getBoolean(R.styleable.Banner_autoPlay, true);
-//        boolean loopMode = attributes.getBoolean(R.styleable.Banner_loopMode, true);
+        loopMode = attributes.getBoolean(R.styleable.Banner_loopMode, true);
         interval = attributes.getInt(R.styleable.Banner_interval, 3000);
         int orientation = attributes.getInt(R.styleable.Banner_orientation, 0);
-//        int scrollTime = attributes.getInt(R.styleable.Banner_scrollTime, 500);
         attributes.recycle();
 
         recyclerView = new RecyclerView(context);
@@ -68,8 +66,7 @@ public class Banner extends FrameLayout {
                 ViewGroup.LayoutParams.MATCH_PARENT);
         addView(recyclerView, vpLayoutParams);
         layoutManager = new BannerLayoutManager(orientation);
-//        layoutManager.setLoopMode(loopMode);
-//        layoutManager.setSmoothScrollTime(scrollTime);
+        layoutManager.setLoopMode(loopMode);
         bannerAdapter = new BannerAdapter();
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(bannerAdapter);
@@ -128,13 +125,10 @@ public class Banner extends FrameLayout {
         indicatorContainer.setVisibility(isShowIndicator ? VISIBLE : GONE);
     }
 
-//    public void setScrollTime(int scrollTime){
-//        layoutManager.setSmoothScrollTime(scrollTime);
-//    }
-
-//    public void setLoopMode(boolean loopMode){
-//        layoutManager.setLoopMode(loopMode);
-//    }
+    public void setLoopMode(boolean loopMode){
+        this.loopMode = loopMode;
+        layoutManager.setLoopMode(loopMode);
+    }
 
     public void setDate(List<String> data){
         if(data != null) {
@@ -155,7 +149,7 @@ public class Banner extends FrameLayout {
         public void run() {
             if(!isTouch) {
                 currentPosition = layoutManager.getCurrentPosition() + 1;
-                if (currentPosition == data.size()) currentPosition = 0;
+                if (currentPosition == data.size()) currentPosition = (loopMode) ? 0 : data.size() - 1;
                 recyclerView.smoothScrollToPosition(currentPosition);
                 indicatorAdapter.setPosition(currentPosition);
             }

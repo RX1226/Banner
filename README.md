@@ -9,9 +9,9 @@ A banner for Android.
 
 It can download image form Internert and append data
 
-*Inspired by [ZhangHao555](https://github.com/ZhangHao555)/**[BannerRecyclerView](https://github.com/ZhangHao555/BannerRecyclerView)**
-
 *Inspired by [ren93](https://github.com/ren93)/**[RecyclerBanner](https://github.com/ren93/RecyclerBanner)****
+
+*Inspired by [ZhangHao555](https://github.com/ZhangHao555)/**[BannerRecyclerView](https://github.com/ZhangHao555/BannerRecyclerView)**
 
 ## How to use
 

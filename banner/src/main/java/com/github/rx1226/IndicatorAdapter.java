@@ -18,7 +18,7 @@ public class IndicatorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private Drawable unSelectDrawable;
     private int size;
     private int currentPosition = 0;
-    private int indicatorSize = 6;
+    private final int indicatorSize = 6;
 
     public void setPosition(int currentPosition) {
         this.currentPosition = currentPosition;
