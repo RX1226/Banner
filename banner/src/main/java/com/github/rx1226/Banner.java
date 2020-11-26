@@ -101,7 +101,7 @@ public class Banner extends FrameLayout {
         LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
         params.gravity = indicatorGravity;
-        int margin = dp2px(12);
+        int margin = dp2px(4);
         params.setMargins(margin, margin, margin, margin);
         addView(indicatorContainer, params);
         if (isShowIndicator) {
